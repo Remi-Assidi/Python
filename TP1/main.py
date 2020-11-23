@@ -4,7 +4,7 @@ prix = 0.0
 quantite = 0.0
 prixTotal = 0.0
 
-nbrProduits = int(input("Conbien de produit voulez vous rentrer: "))
+nbrProduits = int(input("Combien de produit voulez vous rentrer: "))
 for i in range(nbrProduits):
     while True:
         prix = float(input("Veuillez saisir le prix (HT) de votre produit: "))
