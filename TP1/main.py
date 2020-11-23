@@ -2,22 +2,23 @@
 #!/usr/bin/python3
 prix = 0.0
 quantite = 0.0
+prixTotal = 0.0
 
-while True:
-    prix = float(input("Veuillez saisir le prix (HT) de votre produit: "))
-    if prix <= 0:
-        print("Erreur votre prix doit être supérieur à 0.")
-    else:
-        break
-
-while True:
-    quantite = float(input("Veuillez saisir la quantité: "))
-    if quantite <= 0:
-        print("Erreur votre quantite doit être supérieur à 0.")
-    else:
-        break
-
-prixTotal = prix*quantite*1.2
+nbrProduits = int(input("Conbien de produit voulez vous rentrer: "))
+for i in range(nbrProduits):
+    while True:
+        prix = float(input("Veuillez saisir le prix (HT) de votre produit: "))
+        if prix <= 0:
+            print("Erreur votre prix doit être supérieur à 0.")
+        else:
+            break
+    while True:
+        quantite = float(input("Veuillez saisir la quantité: "))
+        if quantite <= 0:
+            print("Erreur votre quantite doit être supérieur à 0.")
+        else:
+            break
+    prixTotal = prix*quantite*1.2
 
 if prixTotal > 200:
     prixTotal = prixTotal*0.95
