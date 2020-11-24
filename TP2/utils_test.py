@@ -1,4 +1,4 @@
-# python -m unittest test.py
+# python -m unittest utils_test.py
 import unittest
 from utils import *;
 
