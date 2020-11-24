@@ -14,7 +14,7 @@ def main():
         if not testerSiNePLusSaisirDeProduit():
             break
 
-    afficherTotal(listeDesProduits)
+    afficherTableauCommande(listeDesProduits)
     prixTotalHT = calculerTotal(listeDesProduits)
     prixApresRemise = calculerRemise(0.95, 200.0, prixTotalHT)
     remise = prixTotalHT - prixApresRemise

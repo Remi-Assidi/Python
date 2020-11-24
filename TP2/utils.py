@@ -19,7 +19,7 @@ def demanderQuantite():
         else:
             return quantite
 
-def afficherTotal(listeDesProduits):
+def afficherTableauCommande(listeDesProduits):
     print("+----------------------------------+---------+------------------------+----------------+")
     print("+------------NOM-------------------+--Prix---+--------Quantité--------+-----Total-HT---+")
     for produit in listeDesProduits:
