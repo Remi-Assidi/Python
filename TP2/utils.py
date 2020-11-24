@@ -42,3 +42,5 @@ def calculerTotalTTC(prixTotalHT):
 def calculerRemise(pourcentageRemise, limiteDeclanchement, prixTotalHT):
     if prixTotalHT > limiteDeclanchement:
         return prixTotalHT*pourcentageRemise
+    else:
+        return prixTotalHT
