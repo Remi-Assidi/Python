@@ -3,6 +3,7 @@ import os
 import re
 import yaml
 import glob
+from cryptography.fernet import Fernet
 import pandas as pd
 
 def printNumberOfResults(dataFrame, recherche):
@@ -33,13 +34,25 @@ parser = argparse.ArgumentParser()
 parser.add_argument("fileMonuments", help="Name of the csv file containing CSV datas")
 parser.add_argument("recherche", help="Word to execute the research")
 parser.add_argument("--region", help="Region filter")
+parser.add_argument("--encrypt", help="Encrypt the results file", type=bool)
 parser.add_argument("--export", help="Export the file", type=bool)
 args = parser.parse_args()
 dataFrame = pd.read_csv(args.fileMonuments, dtype={'tico':str,'ppro':str,'dpro':str,'stat':str,'desc':str,'hist':str,'autr':str,'adrs':str,'reg':str,'dpt_lettre':str,'commune':str,'affe':str,'wadrs':str,'wcom':str,'code_departement':str,'ploc':str,'dmaj':str,'ref':str,'insee':str,'contact':str,'sclx':str,'coordonnees_ban':str}, delimiter=";")
 if args.region:
     dataFrame = dataFrame.loc[dataFrame['reg'].str.contains(args.region)]
 if args.export:
-    createFile("results.txt", dataFrame, args.recherche)
+    createFile("results.yml", dataFrame, args.recherche)
 else:
     printNumberOfResults(dataFrame, args.recherche)
+if args.encrypt:
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    with open('mykey.key', 'wb') as mykey:
+        mykey.write(key)
+    with open('results.yml', 'rb') as original_file:
+        original = original_file.read()
+        encrypted = f.encrypt(original)
+    with open ('enc_results.yml', 'wb') as encrypted_file:
+        encrypted_file.write(encrypted)
+    
 del dataFrame
