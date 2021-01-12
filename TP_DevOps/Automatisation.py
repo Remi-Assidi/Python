@@ -45,8 +45,8 @@ parser.add_argument("fileRegions", help="Name of the csv file containing CSV dat
 parser.add_argument("fileMonuments", help="Name of the csv file containing CSV datas")
 args = parser.parse_args()
 dataFrame = pd.read_csv(args.fileRegions, usecols=['code_departement', 'nom_departement', 'code_region', 'nom_region'])
-createFolders("./departements/", dataFrame)
+createFolders("./Departements/", dataFrame)
 del dataFrame
 dataFrame = pd.read_csv(args.fileMonuments, dtype={'tico':str,'ppro':str,'dpro':str,'stat':str,'desc':str,'hist':str,'autr':str,'adrs':str,'reg':str,'dpt_lettre':str,'commune':str,'affe':str,'wadrs':str,'wcom':str,'code_departement':str,'ploc':str,'dmaj':str,'ref':str,'insee':str,'contact':str,'sclx':str,'coordonnees_ban':str}, delimiter=";")
-createFiles("./departements/", dataFrame, "Philippe Auguste")
+createFiles("./Departements/", dataFrame, "Philippe Auguste")
 del dataFrame
