@@ -3,8 +3,8 @@ import os
 import glob
 import pandas as pd
 
-def createFolders(path, folder):
-    for index, row in folder.iterrows():
+def createFolders(path, dataFrame):
+    for index, row in dataFrame.iterrows():
         try:
             pathWithDepartment = path + row["nom_region"] + "/" + row["nom_departement"]
             if os.path.exists(pathWithDepartment):
