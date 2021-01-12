@@ -1,0 +1,2 @@
+$ python Automatisation.py departements-france.csv liste-des-immeubles-proteges-au-titre-des-monuments-historiques.csv
+$ python Recherche.py liste-des-immeubles-proteges-au-titre-des-monuments-historiques.csv nef --export=True --region="Nouvelle-Aquitaine"

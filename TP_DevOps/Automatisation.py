@@ -24,7 +24,7 @@ def createFolders(path, dataFrame):
         except Exception as e:
             print(e)
         else:
-            print ("Successfully created the directory %s " % pathWithDepartment)
+            print("Successfully created the directory %s " % pathWithDepartment)
 
 def createFiles(path, dataFrame, nomRoi):
     for index, row in dataFrame.iterrows():
@@ -36,7 +36,7 @@ def createFiles(path, dataFrame, nomRoi):
                 with open(pathWithDepartment,'w') as file:
                     documents = yaml.dump(dict_file, file)
                     file.close()
-                    print ("Successfully created the directory %s " % pathWithDepartment)
+                    print("Successfully created the directory %s " % pathWithDepartment)
         except Exception as e:
             print(e)
 
