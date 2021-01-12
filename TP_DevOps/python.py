@@ -1,6 +1,7 @@
 import argparse
 import os
 import re
+import yaml
 import glob
 import pandas as pd
 
@@ -31,10 +32,10 @@ def createFiles(path, dataFrame, nomRoi):
             if re.search(nomRoi, str(row["hist"])): 
                 pathWithDepartment = path + row["reg"] + "/" + row["dpt_lettre"] + "/" + row["tico"] + ".txt"
                 coordinate = str(row["coordonnees_ban"]).split(",")
-                foo = "Nom: " + str(row["tico"]) + "\nDescription: " + str(row["hist"] + "\nCommune: " + str(row["commune"]) + "Localisation: \n\tLongitude: " + coordinate[0] + "\n\tLatitude: " + coordinate[1])
-                with open(pathWithDepartment,'w') as f:
-                    f.write(foo)
-                    f.close()
+                dict_file = [{"Nom" : str(row["tico"])}, {"Description" : str(row["hist"])}, {"Commune" : str(row["commune"])}, {"Localisation" : [{"Longitude" : coordinate[0]}, {"Latitude" : coordinate[1]}]}]
+                with open(pathWithDepartment,'w') as file:
+                    documents = yaml.dump(dict_file, file)
+                    file.close()
                     print ("Successfully created the directory %s " % pathWithDepartment)
         except Exception as e:
             print(e)
