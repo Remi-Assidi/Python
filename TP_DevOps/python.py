@@ -30,7 +30,7 @@ def createFiles(path, dataFrame, nomRoi):
     for index, row in dataFrame.iterrows():
         try:
             if re.search(nomRoi, str(row["hist"])): 
-                pathWithDepartment = path + row["reg"] + "/" + row["dpt_lettre"] + "/" + row["tico"] + ".txt"
+                pathWithDepartment = path + row["reg"] + "/" + row["dpt_lettre"] + "/" + row["tico"] + ".yml"
                 coordinate = str(row["coordonnees_ban"]).split(",")
                 dict_file = [{"Nom" : str(row["tico"])}, {"Description" : str(row["hist"])}, {"Commune" : str(row["commune"])}, {"Localisation" : [{"Longitude" : coordinate[0]}, {"Latitude" : coordinate[1]}]}]
                 with open(pathWithDepartment,'w') as file:
