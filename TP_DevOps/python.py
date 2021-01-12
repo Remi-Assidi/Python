@@ -1,5 +1,6 @@
 import argparse
 import os
+import re
 import glob
 import pandas as pd
 
@@ -24,14 +25,17 @@ def createFolders(path, dataFrame):
         else:
             print ("Successfully created the directory %s " % pathWithDepartment)
 
-def createFiles(path, dataFrame):
+def createFiles(path, dataFrame, nomRoi):
     for index, row in dataFrame.iterrows():
         try:
-            pathWithDepartment = path + row["reg"] + "/" + row["dpt_lettre"] + "/" + row["tico"] + ".txt"
-            foo = "Nom: " + str(row["tico"]) + "\nDescription: " + str(row["hist"])
-            with open(pathWithDepartment,'w') as f:
-                f.write(foo)
-                f.close()
+            if re.search(nomRoi, str(row["hist"])): 
+                pathWithDepartment = path + row["reg"] + "/" + row["dpt_lettre"] + "/" + row["tico"] + ".txt"
+                coordinate = str(row["coordonnees_ban"]).split(",")
+                foo = "Nom: " + str(row["tico"]) + "\nDescription: " + str(row["hist"] + "\nCommune: " + str(row["commune"]) + "Localisation: \n\tLongitude: " + coordinate[0] + "\n\tLatitude: " + coordinate[1])
+                with open(pathWithDepartment,'w') as f:
+                    f.write(foo)
+                    f.close()
+                    print ("Successfully created the directory %s " % pathWithDepartment)
         except Exception as e:
             print(e)
 
@@ -43,5 +47,5 @@ dataFrame = pd.read_csv(args.fileRegions, usecols=['code_departement', 'nom_depa
 createFolders("./departements/", dataFrame)
 del dataFrame
 dataFrame = pd.read_csv(args.fileMonuments, dtype={'tico':str,'ppro':str,'dpro':str,'stat':str,'desc':str,'hist':str,'autr':str,'adrs':str,'reg':str,'dpt_lettre':str,'commune':str,'affe':str,'wadrs':str,'wcom':str,'code_departement':str,'ploc':str,'dmaj':str,'ref':str,'insee':str,'contact':str,'sclx':str,'coordonnees_ban':str}, delimiter=";")
-createFiles("./departements/", dataFrame)
+createFiles("./departements/", dataFrame, "Philippe Auguste")
 del dataFrame
