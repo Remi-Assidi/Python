@@ -42,17 +42,17 @@ if args.region:
     dataFrame = dataFrame.loc[dataFrame['reg'].str.contains(args.region)]
 if args.export:
     createFile("results.yml", dataFrame, args.recherche)
+    if args.encrypt:
+        key = Fernet.generate_key()
+        f = Fernet(key)
+        with open('mykey.key', 'wb') as mykey:
+            mykey.write(key)
+        with open('results.yml', 'rb') as original_file:
+            original = original_file.read()
+            encrypted = f.encrypt(original)
+        with open ('enc_results.yml', 'wb') as encrypted_file:
+            encrypted_file.write(encrypted)
 else:
     printNumberOfResults(dataFrame, args.recherche)
-if args.encrypt:
-    key = Fernet.generate_key()
-    f = Fernet(key)
-    with open('mykey.key', 'wb') as mykey:
-        mykey.write(key)
-    with open('results.yml', 'rb') as original_file:
-        original = original_file.read()
-        encrypted = f.encrypt(original)
-    with open ('enc_results.yml', 'wb') as encrypted_file:
-        encrypted_file.write(encrypted)
     
 del dataFrame
